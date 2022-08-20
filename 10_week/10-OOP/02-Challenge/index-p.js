@@ -12,24 +12,25 @@ const employees = [];
    choices: ['Forward', 'Right', 'Left', 'Back'],
  };
  
- async function main() {
-   console.log('Instructions');
+ async function main(role = 'Manager') {
+  // console.log(role)
+   console.log(`\n\u001b[0;1mPLEASE ENTER THE ${role.toUpperCase()}\'S INFORMATION.`);
 
    //GET EMPLOYEE INFO
-   let role = await getEmployeeRole();
-
    let employee = await getEmployeeInfo();
-
-   let employeeDetails = role.role === "Manager" ? await getManagerInfo() : role.role === "Engineer" ? await getEngineerInfo() : await getInternInfo();
-
-  //  COMBINE EMPLOYEE INFO INTO ONE OBJECT
-   employee.role = role.role;
+   
+   let employeeDetails = role === "Manager" ? await getManagerInfo() : role
+    === "Engineer" ? await getEngineerInfo() : await getInternInfo();
+   
+   //  COMBINE EMPLOYEE INFO INTO ONE OBJECT
+   employee.role = role;
    employee[Object.keys(employeeDetails)] = Object.values(employeeDetails).join('');
-  //  console.log(employee);
-
+   //  console.log(employee);
+   
    //PUSH EMPLOYEES INTO AN ARRAY
    employees.push(employee);
-
+  //  console.log(employees);
+   
    //DETERMINE IF USER WOULD LIKE TO ADD MORE EMPLOYEES
    await confirmContinue();
  }
@@ -66,32 +67,33 @@ const employees = [];
 
  confirmContinue = async () => {
   const confirm = await inquirer.prompt(promptConfirmContinue);
-  console.log(confirm);
+  // console.log(confirm);
   if (confirm.confirmContinue) {
-   main();
+   let role = await getEmployeeRole();
+   main(role.role);
   }
   return confirm;
  }
 
  const promptEmployeeRole = [
    {
-     prefix: "⠋🟡 1)",
+     prefix: "\n⠋🟡 1)",
      type: "rawlist",
      name: "role",
      message: "Please select the employee's role?",
-     choices: ['Engineer', 'Intern', 'Manager'],
+     choices: ['Engineer', 'Intern'],
      // pageSize: 10,
-     default: 2,
+    //  default: 2,
      suffix: " 🟡",
    },
  ]
  
  const promptEmployeeInfo = [
   {
-    prefix: "⠋🟡 2)",
+    prefix: "⠋🟡 1)",
     type: "input",
     name: "firstName",
-    message: `What is the employee's first name`,
+    message: `\u001b[0;1mWhat is the employee's \x1b[36;1mfirst\u001b[0;1m name?`,
     default: "steve",
     suffix: " 🟡",
     validate(answer) {
@@ -107,10 +109,10 @@ const employees = [];
     },
   },
   {
-    prefix: "⠋🟡 3)",
+    prefix: "⠋🟡 2)",
     type: "input",
     name: "lastName",
-    message: `What is the employee's last name`,
+    message: `\u001b[0;1mWhat is the employee's \x1b[36;1mlast\u001b[0;1m name?`,
     default: "calla",
     suffix: " 🟡",
     validate(answer) {
@@ -126,7 +128,7 @@ const employees = [];
     },
   },
   {
-    prefix: "⠋🟡 4)",
+    prefix: "⠋🟡 3)",
     name: "employeeId",
     type: "number",
     message: "Please enter the employee's ID?",
@@ -144,7 +146,7 @@ const employees = [];
     },
   },
   {
-    prefix: "⠋🟡 5)",
+    prefix: "⠋🟡 4)",
     name: "emailAddress",
     type: "input",
     message: "Please enter the employee's email address?",
@@ -161,7 +163,7 @@ const employees = [];
 
 const promptManagerInfo = [
   {
-    prefix: "⠋🟡 6)",
+    prefix: "⠋🟡 5)",
     type: "input",
     name: "officeNumber",
     message: "Please enter the manager's office number?",
@@ -175,7 +177,7 @@ const promptManagerInfo = [
 
 const promptEngineerInfo = [
   {
-    prefix: "⠋🟡 6)",
+    prefix: "⠋🟡 5)",
     type: "input",
     name: "gitHubUserName",
     message: "Please enter the engineer's GitHub user name?",
@@ -189,7 +191,7 @@ const promptEngineerInfo = [
 
 const promptInternInfo = [
   {
-    prefix: "⠋🟡 6)",
+    prefix: "⠋🟡 5)",
     type: "input",
     name: "internSchool",
     message: "Please enter the intern's school?",
@@ -204,7 +206,7 @@ const promptInternInfo = [
 
 const promptConfirmContinue = [
   {
-    prefix: "⠋🟡 1)",
+    prefix: "\n⠋🟡 ",
     type: "confirm",
     name: "confirmContinue",
     message: `Would you like to add more employees?`,
