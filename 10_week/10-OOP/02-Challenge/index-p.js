@@ -93,12 +93,12 @@ const employees = [];
     prefix: "⠋🟡 1)",
     type: "input",
     name: "firstName",
-    message: `\u001b[0;1mWhat is the employee's \x1b[36;1mfirst\u001b[0;1m name?`,
+    message: `\u001b[0;1mEnter the \x1b[36;1mfirst\u001b[0;1m name?`,
     default: "steve",
     suffix: " 🟡",
     validate(answer) {
       if (!answer) {
-        return "Please, provide a first name!";
+        return "Please, provide a first name.";
       }
       return true;
     },
@@ -112,12 +112,12 @@ const employees = [];
     prefix: "⠋🟡 2)",
     type: "input",
     name: "lastName",
-    message: `\u001b[0;1mWhat is the employee's \x1b[36;1mlast\u001b[0;1m name?`,
+    message: `\u001b[0;1mEnter the \x1b[36;1mlast\u001b[0;1m name?`,
     default: "calla",
     suffix: " 🟡",
     validate(answer) {
       if (!answer) {
-        return "Please, provide a last name!";
+        return "Please, provide a last name.";
       }
       return true;
     },
@@ -131,7 +131,7 @@ const employees = [];
     prefix: "⠋🟡 3)",
     name: "employeeId",
     type: "number",
-    message: "Please enter the employee's ID?",
+    message: "Please enter the employee ID?",
     default: "1",
     // validate(input) {
     //   console.log(input)
@@ -149,7 +149,7 @@ const employees = [];
     prefix: "⠋🟡 4)",
     name: "emailAddress",
     type: "input",
-    message: "Please enter the employee's email address?",
+    message: "Please enter the email address?",
     default: "callasteven@gmail.com",
     validate(answer) {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

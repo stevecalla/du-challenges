@@ -94,8 +94,8 @@ const flora = new Intern('flora', 'green', 250, 'f@f.com', 'Oxford');
 flora.getRole();
 flora.getSchool();
 
-console.log(amanda.getName());
 console.log(giles.getName());
+console.log(amanda.getName());
 console.log(sam.getName());
 console.log(flora.getName());
 
