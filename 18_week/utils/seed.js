@@ -16,11 +16,13 @@ connection.once('open', async () => {
     const fullName = getRandomName();
     const first = fullName.split(' ')[0];
     const last = fullName.split(' ')[1];
+    const email = `${last}${first}@email.com`;
 
     users.push({
       first,
       last,
-      age: Math.floor(Math.random() * (99 - 18 + 1) + 18),
+      // age: Math.floor(Math.random() * (99 - 18 + 1) + 18),
+      email,
     });
   }
 
