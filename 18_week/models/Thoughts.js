@@ -1,12 +1,8 @@
 const { Schema, Types } = require('mongoose');
 
-const tagSchema = new Schema(
+const thoughtsSchema = new Schema(
   {
-    tagId: {
-      type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId(),
-    },
-    tagBody: {
+    thoughtText: {
       type: String,
       required: true,
       maxlength: 25,
@@ -15,6 +11,13 @@ const tagSchema = new Schema(
       type: Date,
       default: Date.now,
     },
+    userName: {
+      type: String,
+      required: true,
+      trim: true,
+      maxlength: 30
+    }
+    // reactions: 
   },
   {
     toJSON: {
@@ -24,4 +27,7 @@ const tagSchema = new Schema(
   }
 );
 
-module.exports = tagSchema;
+// Initialize our Thoughts model
+const Thoughts = model('thoughts', thoughtsSchema);
+
+module.exports = Thoughts;

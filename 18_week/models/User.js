@@ -16,6 +16,9 @@ const userSchema = new Schema(
       required: true,
       match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,10})+$/, 'Please fill a valid email address']
     },
+    // thoughts:
+    // friends:
+    
     // applications: [
     //   {
     //     type: Schema.Types.ObjectId,
