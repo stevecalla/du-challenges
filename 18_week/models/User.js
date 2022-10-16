@@ -3,14 +3,25 @@ const { Schema, model } = require('mongoose');
 // Schema to create User model
 const userSchema = new Schema(
   {
-    userName: String,
-    email: String,
-    applications: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Application',
-      },
-    ],
+    userName: {
+      type: String,
+      unique: true,
+      required: true,
+      trim: true,
+      maxlength: 30
+    },
+    email: {
+      type: String,
+      unique: true,
+      required: true,
+      match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,10})+$/, 'Please fill a valid email address']
+    },
+    // applications: [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Application',
+    //   },
+    // ],
   },
   {
     // Mongoose supports two Schema options to transform Objects after querying MongoDb: toJSON and toObject.
@@ -23,18 +34,18 @@ const userSchema = new Schema(
 );
 
 // Create a virtual property `fullName` that gets and sets the user's full name
-userSchema
-  .virtual('fullName')
-  // Getter
-  .get(function () {
-    return `${this.first} ${this.last}`;
-  })
-  // Setter to set the first and last name
-  .set(function (v) {
-    const first = v.split(' ')[0];
-    const last = v.split(' ')[1];
-    this.set({ first, last });
-  });
+// userSchema
+//   .virtual('fullName')
+//   // Getter
+//   .get(function () {
+//     return `${this.first} ${this.last}`;
+//   })
+//   // Setter to set the first and last name
+//   .set(function (v) {
+//     const first = v.split(' ')[0];
+//     const last = v.split(' ')[1];
+//     this.set({ first, last });
+//   });
 
 // Initialize our User model
 const User = model('user', userSchema);

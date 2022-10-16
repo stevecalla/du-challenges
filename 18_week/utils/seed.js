@@ -14,7 +14,7 @@ connection.once('open', async () => {
 
   for (let i = 0; i < 20; i++) {
     const userName = getRandomUserName().toLowerCase();
-    const email = `${userName}@email.com`;
+    const email = `${userName}@email@com`;
 
     users.push({
       userName,
@@ -23,11 +23,11 @@ connection.once('open', async () => {
   }
 
   await User.collection.insertMany(users);
-  await Application.collection.insertMany(applications);
+  // await Application.collection.insertMany(applications);
 
   // loop through the saved applications, for each application we need to generate a application response and insert the application responses
   console.table(users);
-  console.table(applications);
+  // console.table(applications);
   console.info('Seeding complete! 🌱');
   process.exit(0);
 });
