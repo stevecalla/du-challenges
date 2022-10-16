@@ -68,6 +68,19 @@ const names = [
   'Parker',
 ];
 
+const thoughtData = [
+  "thought_1",
+  "thought_2",
+  "thought_3",
+  "thought_4",
+  "thought_5",
+  "thought_6",
+  "thought_7",
+  "thought_8",
+  "thought_9",
+  "thought_10",
+]
+
 const appDescriptions = [
   'Decision Tracker',
   'Find My Phone',
@@ -116,6 +129,10 @@ const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
 const getRandomUserName = () =>
   `${getRandomArrItem(names)}${getRandomArrItem(names)}`;
 
+// Gets a random thought
+const getRandomThought = () =>
+`${getRandomArrItem(thoughtData)}`; 
+
 // Function to generate random applications that we can add to the database. Includes application tags.
 const getRandomApplications = (int) => {
   let results = [];
@@ -146,4 +163,4 @@ const getApplicationTags = (int) => {
 };
 
 // Export the functions for use in seed.js
-module.exports = { getRandomUserName, getRandomApplications };
+module.exports = { getRandomUserName, getRandomThought, getRandomApplications };
