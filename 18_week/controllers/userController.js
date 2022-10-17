@@ -4,8 +4,13 @@ module.exports = {
   // Get all users
   getUsers(req, res) {
     User.find()
+      // .populate('friends', 'email')
+      // .populate('thoughts', 'thoughtsText')
       .then((users) => res.json(users))
-      .catch((err) => res.status(500).json(err));
+      .catch((err) => {
+        console.log({error: err})
+        res.status(500).json(err)
+      });
   },
   // Get a single user
   getSingleUser(req, res) {

@@ -16,9 +16,19 @@ const userSchema = new Schema(
       required: true,
       match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,10})+$/, 'Please fill a valid email address']
     },
-    // thoughts:
-    // friends:
-    
+    thoughts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'thought',
+      }
+    ],
+    friends: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'user',
+      }
+    ]
+
     // applications: [
     //   {
     //     type: Schema.Types.ObjectId,
@@ -36,19 +46,13 @@ const userSchema = new Schema(
   }
 );
 
-// Create a virtual property `fullName` that gets and sets the user's full name
-// userSchema
-//   .virtual('fullName')
-//   // Getter
-//   .get(function () {
-//     return `${this.first} ${this.last}`;
-//   })
-//   // Setter to set the first and last name
-//   .set(function (v) {
-//     const first = v.split(' ')[0];
-//     const last = v.split(' ')[1];
-//     this.set({ first, last });
-//   });
+// Create a virtual property for the count of friends
+userSchema
+  .virtual('friendCount')
+  // Getter
+  .get(function () {
+    return this.friends.length;
+  });
 
 // Initialize our User model
 const User = model('user', userSchema);
